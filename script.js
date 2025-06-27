@@ -20,6 +20,11 @@ function onAddItemSubmit(e) {
         alert('Please add an item');
         return;
     }
+    // Check for duplicity
+    if (checkIfItemExists(newItem)) {
+        alert('That item already exists');
+        return;
+    }
     // Check for edit mode
     if (isEditMode) {
         const itemToEdit = itemList.querySelector('.edit-mode');
@@ -27,11 +32,6 @@ function onAddItemSubmit(e) {
         itemToEdit.classList.remove('edit-mode');
         itemToEdit.remove();
         isEditMode = false;
-    } else {
-        if (checkIfItemExists(newItem)) {
-            alert('That item already exists');
-            return;
-        }
     }
     // Create item DOM element
     addItemToDOM(newItem);
